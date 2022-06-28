@@ -1,0 +1,228 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "API REST Documentation",
+        "version": "1.0.0",
+        "license": {
+            "name": "ISC"
+        },
+        "description": "API REST for manage users"
+    },
+    "tags": [
+        {
+            "name": "members",
+            "description": "function for manage users"
+        }
+    ],
+    "basePath": "/api/v1",
+    "host": "localhost:8080",
+    "paths": {
+        "/members/{id}": {
+            "get": {
+                "summary": "members/{id}",
+                "consumes": ["multipart/form-data"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": { "$ref": "#/definitions/ApiResponse" }
+                    }
+                },
+                "tags": ["members"]
+            },
+            "put": {
+                "summary": "members/{id}",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "example": "success"
+                                },
+                                "result": {
+                                    "type": "boolean",
+                                    "example": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["members"]
+            },
+            "delete": {
+                "summary": "members/{id}",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "example": "success"
+                                },
+                                "result": {
+                                    "type": "boolean",
+                                    "example": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["members"]
+            }
+        },
+        "/members": {
+            "get": {
+                "summary": "members",
+                "parameters": [
+                    {
+                        "name": "max",
+                        "in": "query",
+                        "required": false,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "example": "success"
+                                },
+                                "result": {
+                                    "type": "array",
+                                    "xml": { "wrapped": true },
+                                    "items": {
+                                        "type": "object",
+                                        "xml": { "name": "result" },
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "format": "int64",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Thomas"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["members"]
+            },
+            "post": {
+                "summary": "members",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "example": "success"
+                                },
+                                "result": {
+                                    "type": "object",
+                                    "xml": { "name": "result" },
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Thomas"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["members"]
+            }
+        }
+    },
+    "definitions": {
+        "ApiResponse": {
+            "type": "object",
+            "properties": {
+                "status": { "type": "string", "example": "success" },
+                "result": { "$ref": "#/definitions/Members" }
+            }
+        },
+        "Members": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "integer", "format": "int64", "example": 1 },
+                "name": { "type": "string", "example": "Thomas" }
+            },
+            "xml": { "name": "Category" }
+        }
+    }
+}
